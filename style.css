@@ -17,3 +17,14 @@
 .group h4:after{content:"";display:block;position:absolute;bottom:0;left:0;width:100%;height:7px;background:var(--butter);clip-path:polygon(1.8% 49%,11% 32%,23% 19%,38% 9%,55% 5%,72% 7%,87% 14%,100% 27%,100% 34%,87% 26%,72% 23%,55% 24%,38% 35%,23% 51%,10% 73%,0 100%)}
 .item span{background:transparent;border:0}
 @media(prefers-reduced-motion:reduce){.icecard .dock{background:none}}
+
+.ribbon{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.4rem;align-items:center;padding:.7rem 6%}
+.hours-message{color:var(--butter);font:600 .96rem/1.4 Arial,sans-serif;text-decoration:none}
+.ribbon-window{overflow:hidden;min-width:0}
+.ribbon-track{display:flex;width:max-content}
+.ribbon-sequence{display:flex;align-items:center;justify-content:space-around;gap:2.5rem;padding-right:2.5rem;min-width:62vw;white-space:nowrap}
+.ribbon-pause{border:1px solid currentColor;background:transparent;color:var(--paper);border-radius:50%;width:32px;height:32px;font:16px/1 Arial;cursor:pointer}
+@keyframes ribbon-slide{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:no-preference){.ribbon-track{animation:ribbon-slide 30s linear infinite}.ribbon.is-paused .ribbon-track{animation-play-state:paused}}
+@media(max-width:700px){.ribbon{grid-template-columns:minmax(0,1fr) auto;gap:.35rem 1rem;padding:.65rem 5%}.hours-message{grid-column:1/-1}.ribbon-sequence{min-width:85vw;gap:1.5rem;padding-right:1.5rem}}
+@media(prefers-reduced-motion:reduce){.ribbon-pause,.ribbon-sequence[aria-hidden]{display:none}.ribbon-track{width:100%}.ribbon-sequence{min-width:0;width:100%;gap:.25rem;padding:0}.ribbon-sequence i:last-child{display:none}}

@@ -32,3 +32,30 @@ document.addEventListener('click', event => {
 });
 addEventListener('hashchange', selectHash);
 selectHash();
+
+const ribbon = document.querySelector('.ribbon');
+const hours = ribbon.querySelector('.hours-message');
+const pause = ribbon.querySelector('.ribbon-pause');
+const amsterdamClock = new Intl.DateTimeFormat('nl-NL', {
+  timeZone: 'Europe/Amsterdam', hour: '2-digit', hourCycle: 'h23'
+});
+function openingMessage(now) {
+  return Number(amsterdamClock.format(now)) < 21
+    ? 'Vandaag geopend van 10.00 tot 21.00 uur'
+    : 'Morgen weer geopend vanaf 10.00 uur';
+}
+let hoursTimer;
+function refreshHours() {
+  clearTimeout(hoursTimer);
+  const now = new Date();
+  hours.textContent = openingMessage(now);
+  hoursTimer = setTimeout(refreshHours, 60000 - now.getTime() % 60000);
+}
+refreshHours();
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshHours(); });
+pause.hidden = false;
+pause.addEventListener('click', () => {
+  const paused = ribbon.classList.toggle('is-paused');
+  pause.textContent = paused ? '▶' : 'Ⅱ';
+  pause.setAttribute('aria-label', paused ? 'Hervat de bewegende tekst' : 'Pauzeer de bewegende tekst');
+});
