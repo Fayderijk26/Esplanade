@@ -19,7 +19,10 @@
 @media(prefers-reduced-motion:reduce){.icecard .dock{background:none}}
 
 .ribbon{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.4rem;align-items:center;padding:.7rem 6%}
-.hours-message{color:var(--butter);font:inherit;text-decoration:none}
+.ribbon-sequence > span, .ribbon-sequence > a {
+  font: italic 400 clamp(1.1rem, 2vw, 1.65rem)/1.2 Georgia, serif;
+}
+.hours-message{color:var(--butter);text-decoration:none}
 .ribbon-window{overflow:hidden;min-width:0}
 .ribbon-track{display:flex;width:max-content}
 .ribbon-sequence{display:flex;align-items:center;justify-content:space-around;gap:2.5rem;padding-right:2.5rem;min-width:100vw;white-space:nowrap}
