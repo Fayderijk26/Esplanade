@@ -34,7 +34,7 @@ addEventListener('hashchange', selectHash);
 selectHash();
 
 const ribbon = document.querySelector('.ribbon');
-const hours = ribbon.querySelector('.hours-message');
+const hours = ribbon.querySelectorAll('.hours-message');
 const pause = ribbon.querySelector('.ribbon-pause');
 const amsterdamClock = new Intl.DateTimeFormat('nl-NL', {
   timeZone: 'Europe/Amsterdam', hour: '2-digit', hourCycle: 'h23'
@@ -48,7 +48,8 @@ let hoursTimer;
 function refreshHours() {
   clearTimeout(hoursTimer);
   const now = new Date();
-  hours.textContent = openingMessage(now);
+  const message = openingMessage(now);
+  hours.forEach(label => { label.textContent = message; });
   hoursTimer = setTimeout(refreshHours, 60000 - now.getTime() % 60000);
 }
 refreshHours();
